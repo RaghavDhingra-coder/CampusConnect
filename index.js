@@ -18,9 +18,9 @@ import EventRouter from "./routes/event.route.js";
 import RegisterationRouter from "./routes/registeration.route.js";
 import Paymentrouter from "./routes/payment.route.js";
 
-app.set("trust proxy", 1);   // ✅ ADD THIS LINE
+  // ✅ ADD THIS LINE
 const app = express();
-
+app.set("trust proxy", 1); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

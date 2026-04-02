@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const corsOptions = {
-    origin:"https://campus-connect-frontend-guk58q5nm-raghav-dhingras-projects.vercel.app",
+    origin:"https://campusconnect-frontend-s51q.onrender.com",
     credentials: true
 };
 

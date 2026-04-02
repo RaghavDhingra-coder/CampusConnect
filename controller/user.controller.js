@@ -88,16 +88,17 @@ export const login = async (req,res)=>
         }
 
         
-        return res.status(200).cookie("token",token,{
-            httpOnly:true,
-            secure:true,
-            sameSite:"none",
-            maxAge:24*60*60*1000
-        }).json({
-            message:`Welcome Back ${user.USN}`,
-            user:userData,
-            success:true
-        })
+        return res.status(200).cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/",                    // ✅ ADD THIS
+    maxAge: 24 * 60 * 60 * 1000
+}).json({
+    message: `Welcome Back ${user.USN}`,
+    user: userData,
+    success: true
+});
     }
 
     catch(err)

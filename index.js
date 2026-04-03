@@ -3,7 +3,6 @@ dotenv.config();
 
 import express from "express";
 import cookieParser from "cookie-parser";
-import cors from "cors";
 import path from "path";
 import connectDB from "./utils/db.js";
 
@@ -15,32 +14,30 @@ import Paymentrouter from "./routes/payment.route.js";
 
 const app = express();
 
-// ✅ middleware
+// ✅ Middlewares
 app.set("trust proxy", 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// ❌ REMOVE CORS (not needed now)
-// app.use(cors(...))
-
-// ✅ API routes
+// ✅ API Routes
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/club", ClubRouter);
 app.use("/api/v1/event", EventRouter);
 app.use("/api/v1/registeration", RegisterationRouter);
 app.use("/api/v1/payment", Paymentrouter);
 
-// ✅ SERVE FRONTEND
+// ✅ Serve frontend (IMPORTANT)
 const __dirname = path.resolve();
 
 app.use(express.static(path.join(__dirname, "dist")));
 
-app.get("*", (req, res) => {
+// ✅ FIX for Express 5
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-// ✅ start server
+// ✅ Start server
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

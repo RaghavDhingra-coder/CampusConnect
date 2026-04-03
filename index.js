@@ -11,6 +11,7 @@ import ClubRouter from "./routes/club.route.js";
 import EventRouter from "./routes/event.route.js";
 import RegisterationRouter from "./routes/registeration.route.js";
 import Paymentrouter from "./routes/payment.route.js";
+import cors from "cors"
 
 const app = express();
 
@@ -19,6 +20,11 @@ app.set("trust proxy", 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use(cors({
+    origin: true, // ✅ set CLIENT_URL in Render env vars
+    credentials: true
+}))
 
 // ✅ API Routes
 app.use("/api/v1/user", userRouter);

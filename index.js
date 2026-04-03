@@ -27,13 +27,13 @@ app.use("/api/v1/event", EventRouter);
 app.use("/api/v1/registeration", RegisterationRouter);
 app.use("/api/v1/payment", Paymentrouter);
 
-// ✅ Serve frontend (IMPORTANT)
+// ✅ Serve frontend (VERY IMPORTANT)
 const __dirname = path.resolve();
 
 app.use(express.static(path.join(__dirname, "dist")));
 
-// ✅ FIX for Express 5
-app.get("/*", (req, res) => {
+// ✅ Express 5 safe fallback (NO "*", NO "/*")
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
